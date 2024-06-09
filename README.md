@@ -17,16 +17,12 @@ This Python script automates the process of checking security headers for a list
 
 ### Requirements
 - Python 3
-- requests library (`pip3 install requests`)
-- urllib3 library (`pip3 install urllib3`)
-- colorama library (optional, for colored output: `pip3 install colorama`)
-- tabulate library (optional, for table formatting: `pip3 install tabulate`)
   
 ### Usage
 1- Clone or download the repository.
 2- Install required libraries:
 ```bash
-pip3 install requests urllib3 colorama tabulate  # (optional for colored output and table formatting)
+pip3 install -r requirements.txt
 ```
 3- Create a text file (e.g., urls.txt) containing the URLs you want to check, with each URL on a separate line.
 4- Run the script from the command line:
