@@ -5,16 +5,35 @@ from colorama import Fore, Style
 from tabulate import tabulate
 urllib3.disable_warnings(category=urllib3.exceptions.InsecureRequestWarning)
 
+class config:
+    all_headers = ["Content-Security-Policy",
+            "Strict-Transport-Security",
+            "X-Frame-Options",
+            "X-Content-Type-Options",
+            "Cache-Control",
+            "Server",
+            "X-Powered-By",
+            "X-AspNet-Version",
+            "X-AspNetMvc-Version",
+            "Access-Control-Allow-Origin"]
+
+    security_headers = [
+            "Content-Security-Policy",
+            "Strict-Transport-Security",
+            "X-Frame-Options",
+            "X-Content-Type-Options",
+            "Cache-Control"]
+
+    information_headers = ["Server","X-Powered-By","X-AspNet-Version","X-AspNetMvc-Version","Access-Control-Allow-Origin"]
+
 def check_security_headers(urls, ignore_ssl_errors):
-    
+
     for url in urls:
-                
         try:
-            response = requests.get(url, verify=ignore_ssl_errors)  
-            
+            response = requests.get(url, verify=ignore_ssl_errors, headers={"Origin":url})  
         except Exception as e:
             exit(f"[Error] Failure {url}: {e}")
-        
+
         headers = response.headers
         status_code = response.status_code
 
@@ -31,25 +50,27 @@ def check_security_headers(urls, ignore_ssl_errors):
             print(f"\n{Fore.CYAN + url + Style.RESET_ALL}" , " ", Fore.RED + str(status_code) + Style.RESET_ALL)
 
         # Check for each security header
-        security_headers = {
-            "Content-Security-Policy": ("Content-Security-Policy"),
-            "Strict-Transport-Security": ("Strict-Transport-Security"),
-            "Content-Type-Options": ("Content-Type-Options"),
-            "X-Frame-Options": ("X-Frame-Options"),
-            "X-Content-Type-Options": ("X-Content-Type-Options"),
-            "Cache-Control": ("Cache-Control")
-        }
         table = []
-        for header_name, (header_key) in security_headers.items():
-            if header_key in headers:
-                status = Fore.GREEN + "Match" + Style.RESET_ALL 
-                table.append([status, header_name, headers[header_key]])
-            else:
-                status = Fore.YELLOW + "Warning" + Style.RESET_ALL  
-                table.append([status, header_name, "-"])
+        for header_name in config.all_headers:
+            if header_name in headers:
+
+                if header_name in config.security_headers:
+                    status = Fore.GREEN + "Match" + Style.RESET_ALL 
+                    table.append([status, header_name, headers[header_name]])
+
+                if header_name in config.information_headers:
+                    status = Fore.BLUE + "Information" + Style.RESET_ALL
+                    table.append([status, header_name, headers[header_name]])
+
+            elif header_name in config.security_headers: 
+                    status = Fore.YELLOW + "Warning" + Style.RESET_ALL  
+                    table.append([status, header_name, "-"])
+
         print(tabulate(table, headers=["Status", "Header", "Value"]))
+
+
 def read_urls_from_file(filename):
-  
+
     if filename is None:
         print("Error: No file path provided.")
         return []  # Return an empty list if no filename is given
@@ -66,7 +87,7 @@ def read_urls_from_file(filename):
         return []
 
 if __name__ == "__main__":
-    
+
     parser = argparse.ArgumentParser(description="Check security headers for URLs")
     parser.add_argument("-f", "--file", dest="urls_file", required=True,
                         help="Path to a text file containing URLs, each url in a line (required)")
