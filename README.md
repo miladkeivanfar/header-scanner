@@ -4,12 +4,17 @@ This Python script automates the process of checking security headers for a list
 
 ### Features
 - Checks for a predefined set of common security headers:
-- Content-Security-Policy
-- Strict-Transport-Security
-- Content-Type-Options
-- X-Frame-Options
-- X-Content-Type-Options
-- Cache-Control
+  - Content-Security-Policy
+  - Strict-Transport-Security
+  - X-Frame-Options
+  - X-Content-Type-Options
+  - Cache-Control
+- Checks for information common headers:
+  - Server
+  - X-Powered-By
+  - X-AspNet-Version
+  - X-AspNetMvc-Version
+  - Access-Control-Allow-Origin (if CORS was enabled this response header exist) 
 - Presents results in a clear tabular format with color-coded status indicators for easier readability.
 - Provides options to:
 - Specify a text file containing URLs to check.
