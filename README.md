@@ -1,5 +1,5 @@
-## Security Header Checker
-This Python script automates the process of checking security headers for a list of URLs. It helps identify potential security vulnerabilities on websites.
+## Header Scanner
+This Python script automates the process of checking headers for a list of URLs. It helps identify potential security vulnerabilities on websites.
 
 
 ### Features
@@ -32,12 +32,12 @@ pip3 install -r requirements.txt
 3- Create a text file (e.g., urls.txt) containing the URLs you want to check, with each URL on a separate line.
 4- Run the script from the command line:
 ```bash
-python3 sec-header_check.py -f urls.txt
+python3 header-scanner.py -f urls.txt
 ```
 - Replace urls.txt with the actual filename containing your URLs.
 - Use the --ignore-ssl-errors flag to ignore SSL verification errors (not recommended for production):
 ```bash
-python3 sec-header_check.py -f urls.txt --ignore-ssl-errors
+python3 header-scanner.py -f urls.txt --ignore-ssl-errors
 ```
 ### Example Output
 The script will display the URLs, their status codes (color-coded for easy visual identification), and presence or absence of security headers in a table format:
