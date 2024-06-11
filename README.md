@@ -42,7 +42,8 @@ python3 header-scanner.py -f urls.txt --ignore-ssl-errors
 ### Example Output
 The script will display the URLs, their status codes (color-coded for easy visual identification), and presence or absence of security headers in a table format:
 
-![security header check example](https://github.com/khshathra-BH/sec-header-check/assets/129506375/e0db0324-b705-4088-9f93-30ea1aafd782)
+![security header check example](https://github.com/khshathra-BH/header-scanner/assets/129506375/cd91eb1e-1fec-4458-8502-497491f76427)
+
 
 
 
