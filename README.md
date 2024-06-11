@@ -49,5 +49,6 @@ The script will display the URLs, their status codes (color-coded for easy visua
 
 - Match: Security header present
 - WARNING: Security header missing (warning)
+- Information: Information for finger print
 
   
