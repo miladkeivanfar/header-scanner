@@ -19,17 +19,20 @@ This Python script automates the process of checking headers for a list of URLs.
 - Provides options to:
 - Specify a text file containing URLs to check.
 - Ignore SSL verification errors (for testing purposes).
+- Print failure URLs
+- Add option for summery report
+- Get subdomains in pipe (cat subdomains | python3 resolved_mapper.py )
 
 ### Requirements
 - Python 3
   
 ### Usage
 1- Clone or download the repository.
+
 2- Install required libraries:
 ```bash
 pip3 install -r requirements.txt
 ```
-3- Create a text file (e.g., urls.txt) containing the URLs you want to check, with each URL on a separate line.
 4- Run the script from the command line:
 ```bash
 python3 header-scanner.py -f urls.txt
@@ -39,10 +42,25 @@ python3 header-scanner.py -f urls.txt
 ```bash
 python3 header-scanner.py -f urls.txt --ignore-ssl-errors
 ```
+## Optional arguments:
+```bash
+options:
+  -h, --help               show this help message and exit
+  -f URLS_FILE, --file     URLS_FILE
+                           Path to a text file containing URLs, each url in a line (required)
+  -r, --report             Show a summery report
+  -k, --failure            Show failure URL
+  -i, --ignore-ssl-errors  Ignore SSL verification errors
+```
+
 ### Example Output
 The script will display the URLs, their status codes (color-coded for easy visual identification), and presence or absence of security headers in a table format:
 
-![security header check example](https://github.com/khshathra-BH/header-scanner/assets/129506375/cd91eb1e-1fec-4458-8502-497491f76427)
+
+
+
+
+
 
 
 
