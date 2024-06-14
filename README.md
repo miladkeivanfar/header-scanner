@@ -53,18 +53,7 @@ options:
   -i, --ignore-ssl-errors  Ignore SSL verification errors
 ```
 
-### Example Output
-The script will display the URLs, their status codes (color-coded for easy visual identification), and presence or absence of security headers in a table format:
-
-
-
-
-
-
-
-
-
-
+Colors:
 - Match: Security header present
 - WARNING: Security header missing (warning)
 - Information: Information for finger print
