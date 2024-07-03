@@ -1,5 +1,4 @@
 #!/usr/bin/python3
-
 import argparse
 import requests
 import urllib3
@@ -59,7 +58,7 @@ def report(all_url, duration_process=None, failure_count=None):
 
     table = [["Duration", duration_process, "Duration of process"], ["", "", ""],
              ["All URLs", all_url, "Number of URL in input file"]
-        , ["Failure URL", failure_count, "Number of Failure URL"]]
+        , [Fore.RED +"Failure URL"+Style.RESET_ALL, failure_count, "Number of Failure URL"]]
 
     print(tabulate(table, headers=["Name", "Quantity", "Description"], tablefmt="github"))
 
@@ -71,7 +70,13 @@ def check_security_headers(urls, ignore_ssl_errors):
 
     for url in urls:
         try:
-            response = requests.get(url, verify=ignore_ssl_errors, headers={"Origin": url})
+            if url.startswith("http"):
+                response = requests.get(url, verify=ignore_ssl_errors, headers={"Origin": url})
+            else:
+                print(f"Please provide url for {url} \nlike: https://{url}")
+                failure_count += 1
+                failure_url.append(url)
+                continue
 
         except requests.exceptions.SSLError as e:
             # Increment failure count
